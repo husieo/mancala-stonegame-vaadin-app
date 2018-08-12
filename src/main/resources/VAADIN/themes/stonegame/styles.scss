@@ -1,0 +1,23 @@
+@import "../valo/valo.scss";
+
+.stonegame{
+  @include valo;
+
+  .v-button {
+    border: none;
+    box-shadow: none;
+    background: none;
+    width: 80px;
+    height: 80px;
+  }
+
+  .active-button {
+    color: green;
+  }
+
+  .enemy-button{
+    color:red;
+  }
+
+
+}
