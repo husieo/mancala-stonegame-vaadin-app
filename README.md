@@ -5,6 +5,6 @@ To start sowing the stones, just press on any of the green pits(player 1 starts)
 
 To compile and run:
 
-mvn clean install
+**mvn clean install**
 
-mvn spring-boot:run
+**mvn spring-boot:run**
