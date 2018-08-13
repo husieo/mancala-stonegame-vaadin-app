@@ -27,7 +27,7 @@ import java.util.List;
 @SpringView(name = MainView.VIEW_NAME)
 public class MainView extends VerticalLayout implements View {
 
-    public static final String VIEW_NAME = "MAIN_VIEW";
+    public static final String VIEW_NAME = "mainView";
 
     private GameStateController gameStateController;
 
@@ -36,8 +36,10 @@ public class MainView extends VerticalLayout implements View {
 
     @Value("${pits.number}")
     private int pitsNumber;
+
     private Button firstPlayerPit;
     private Button secondPlayerPit;
+    private Button restartButton;
     private GridLayout smallPitsLayout;
     private List<List<Button>> pitButtons;
     private Label descriptionLabel;
@@ -51,47 +53,27 @@ public class MainView extends VerticalLayout implements View {
     private void init() {
         GameStateDto gameStateDto = gameStateController.getGameState();
         descriptionLabel = new Label();
+        restartButton = new Button("RESTART");
+        restartButton.setEnabled(false);
+        restartButton.setDisableOnClick(true);
+        restartButton.addClickListener(action -> {
+            gameStateController.restartGame();
+            refreshView();
+        });
+        restartButton.setStyleName("restart-button");
+
         addComponent(descriptionLabel);
+        addComponent(restartButton);
+
         addComponent(initPlayerGrid());
         updatePlayerGrid(gameStateDto);
     }
 
     /**
-     * Update player grid according to the game state
+     * initialize view components for the pits
      *
-     * @param gameStateDto
+     * @return
      */
-    private void updatePlayerGrid(GameStateDto gameStateDto) {
-        List<PlayerStateDto> playerStateDtoList = gameStateDto.getPlayerStateDtoList();
-        int activePlayerId = gameStateDto.getActivePlayer();
-        firstPlayerPit.setCaption(playerStateDtoList.get(0).getScorePit().toString());
-        secondPlayerPit.setCaption(playerStateDtoList.get(1).getScorePit().toString());
-        if (gameStateDto.isGameOver()) {
-            descriptionLabel.setValue("GAME OVER");
-        }
-        for (int i = 0; i < playersNumber; i++) {
-            List<Integer> pitList = playerStateDtoList.get(i).getPitList();
-            for (int j = 0; j < pitsNumber; j++) {
-                final int playerId = i;
-                final int pitId = (playerId % 2 == 1) ? j : (pitsNumber - j - 1);
-                Button pitButton = pitButtons.get(i).get(j);
-                if (i == activePlayerId) {
-                    pitButton.setStyleName("active-button");
-                    pitButton.setEnabled(true);
-                } else {
-                    pitButton.setStyleName("enemy-button");
-                    pitButton.setEnabled(false);
-                }
-                Integer pitValue = pitList.get(pitId);
-                if (pitValue == 0) {
-                    pitButton.setEnabled(false);
-                }
-                pitButton.setCaption(pitValue.toString());
-            }
-        }
-
-    }
-
     private HorizontalLayout initPlayerGrid() {
         HorizontalLayout boardLayout = new HorizontalLayout();
 
@@ -121,15 +103,61 @@ public class MainView extends VerticalLayout implements View {
         return boardLayout;
     }
 
+    /**
+     * update the view
+     */
     private void refreshView() {
         GameStateDto gameStateDto = gameStateController.getGameState();
         updatePlayerGrid(gameStateDto);
     }
 
+    /**
+     * process the turn after click on the pit
+     *
+     * @param playerId
+     * @param pitId
+     */
     private void sendTurn(int playerId, int pitId) {
         TurnActionDto turnActionDto = TurnActionDto.builder().playerId(playerId).pitId(pitId).build();
         gameStateController.processGameTurn(turnActionDto);
         refreshView();
+    }
+
+    /**
+     * Update player grid according to the game state
+     *
+     * @param gameStateDto
+     */
+    private void updatePlayerGrid(GameStateDto gameStateDto) {
+        List<PlayerStateDto> playerStateDtoList = gameStateDto.getPlayerStateDtoList();
+        int activePlayerId = gameStateDto.getActivePlayer();
+        firstPlayerPit.setCaption(playerStateDtoList.get(0).getScorePit().toString());
+        secondPlayerPit.setCaption(playerStateDtoList.get(1).getScorePit().toString());
+        if (gameStateDto.isGameOver()) {
+            descriptionLabel.setValue("GAME OVER");
+            restartButton.setEnabled(true);
+        }
+        for (int i = 0; i < playersNumber; i++) {
+            List<Integer> pitList = playerStateDtoList.get(i).getPitList();
+            for (int j = 0; j < pitsNumber; j++) {
+                final int playerId = i;
+                final int pitId = (playerId % 2 == 1) ? j : (pitsNumber - j - 1);
+                Button pitButton = pitButtons.get(i).get(j);
+                if (i == activePlayerId) {
+                    pitButton.setStyleName("active-button");
+                    pitButton.setEnabled(true);
+                } else {
+                    pitButton.setStyleName("enemy-button");
+                    pitButton.setEnabled(false);
+                }
+                Integer pitValue = pitList.get(pitId);
+                if (pitValue == 0) {
+                    pitButton.setEnabled(false);
+                }
+                pitButton.setCaption(pitValue.toString());
+            }
+        }
+
     }
 
 

@@ -26,9 +26,7 @@ public class PlayerStateDto {
 
     public PlayerStateDto(PlayerStateDto other){
         pitList = new ArrayList<>();
-        for(Integer el : other.getPitList()){
-            pitList.add(new Integer(el));
-        }
+        pitList.addAll(other.getPitList());
         playerId = other.getPlayerId();
         scorePit = other.scorePit;
     }

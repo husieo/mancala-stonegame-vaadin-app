@@ -22,6 +22,10 @@ public class GameStateDto {
     List<PlayerStateDto> playerStateDtoList;
     private boolean gameOver;
 
+    /**
+     * Copy constructor
+     * @param other
+     */
     public GameStateDto(GameStateDto other){
         this.setActivePlayer(other.getActivePlayer());
         this.setGameOver(other.isGameOver());

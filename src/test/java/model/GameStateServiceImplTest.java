@@ -10,6 +10,7 @@ import org.junit.Test;
 /**
  * Created by Oleksandr Husiev on 8/13/2018.
  */
+//@RunWith(SpringRunner.class)
 public class GameStateServiceImplTest {
 
     private GameStateService gameStateService;
@@ -17,6 +18,7 @@ public class GameStateServiceImplTest {
     @Before
     public void setUp() {
         gameStateService = new GameStateServiceImpl();
+        gameStateService.initGame();
     }
 
     @Test

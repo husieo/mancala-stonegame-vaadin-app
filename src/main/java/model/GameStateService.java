@@ -12,4 +12,5 @@ public interface GameStateService {
 
     GameStateDto getGameState();
     void processTurn(TurnActionDto turnActionDto);
+    void initGame();
 }

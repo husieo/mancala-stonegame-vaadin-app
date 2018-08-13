@@ -34,6 +34,7 @@ public class GameStateServiceImpl implements GameStateService {
         return new GameStateDto(gameStateDto);
     }
 
+    @Override
     @PostConstruct
     public void initGame() {
         gameStateDto = GameStateDto.builder()
@@ -78,9 +79,10 @@ public class GameStateServiceImpl implements GameStateService {
     private void captureStones(int playerId, int currentPit) {
         if(playerId == gameStateDto.getActivePlayer()) {
             int otherPlayerId = (playerId + 1) % playersNumber;
-            int otherPlayerPitValue = gameStateDto.getSmallPitValue(otherPlayerId, pitsNumber - currentPit - 1);
+            int otherPitNumber = pitsNumber - currentPit - 1;
+            int otherPlayerPitValue = gameStateDto.getSmallPitValue(otherPlayerId, otherPitNumber);
             gameStateDto.updateScorePitValue(playerId, otherPlayerPitValue + 1);
-            gameStateDto.updateSmallPitValue(otherPlayerId, currentPit, -otherPlayerPitValue);
+            gameStateDto.updateSmallPitValue(otherPlayerId, otherPitNumber, -otherPlayerPitValue);
         }
     }
 

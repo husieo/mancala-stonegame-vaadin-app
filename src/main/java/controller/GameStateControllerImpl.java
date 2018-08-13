@@ -12,13 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class GameStateControllerImpl implements GameStateController {
 
+
+    private static final long serialVersionUID = -6242854424423314906L;
+
     @Autowired
     private GameStateService gameStateService;
 
 
     public GameStateDto getGameState() {
-        GameStateDto gameStateDto = gameStateService.getGameState();
-        return gameStateDto;
+        return gameStateService.getGameState();
     }
 
     public void processGameTurn(TurnActionDto turnActionDto) {
@@ -26,5 +28,10 @@ public class GameStateControllerImpl implements GameStateController {
             throw new IllegalArgumentException();
         }
         gameStateService.processTurn(turnActionDto);
+    }
+
+    @Override
+    public void restartGame() {
+        gameStateService.initGame();
     }
 }
