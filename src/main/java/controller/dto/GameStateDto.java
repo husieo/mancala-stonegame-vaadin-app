@@ -2,10 +2,12 @@
 
 package controller.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,9 +16,20 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class GameStateDto {
     private int activePlayer;
     List<PlayerStateDto> playerStateDtoList;
+    private boolean gameOver;
+
+    public GameStateDto(GameStateDto other){
+        this.setActivePlayer(other.getActivePlayer());
+        this.setGameOver(other.isGameOver());
+        playerStateDtoList = new ArrayList<>();
+        for(PlayerStateDto playerStateDto : other.getPlayerStateDtoList()){
+            playerStateDtoList.add(new PlayerStateDto(playerStateDto));
+        }
+    }
 
 
     public int getSmallPitValue(int playerId, int pitNumber) {

@@ -1,4 +1,3 @@
-view\component\PlayerBoardLayout.class
 controller\dto\TurnActionDto.class
 view\VaadinUI.class
 controller\GameStateControllerImpl.class
@@ -9,9 +8,9 @@ boot\VaadinApplication.class
 controller\ControllerConfig.class
 model\ModelConfig.class
 view\ViewConfig.class
-view\component\PitButton.class
 controller\dto\PlayerStateDto.class
 controller\dto\TurnActionDto$TurnActionDtoBuilder.class
+model\Error.class
 view\MainView.class
 model\GameStateServiceImpl.class
 controller\dto\GameStateDto.class

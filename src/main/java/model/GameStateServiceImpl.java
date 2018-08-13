@@ -5,8 +5,10 @@ package model;
 import controller.dto.GameStateDto;
 import controller.dto.PlayerStateDto;
 import controller.dto.TurnActionDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +19,23 @@ import java.util.List;
 public class GameStateServiceImpl implements GameStateService {
 
     private GameStateDto gameStateDto;
-    private static int PLAYERS_NUMBER = 2;
-    private static int PITS_NUMBER = 6;
-    private static int STARTING_STONE_NUMBER = 6;
 
-    public GameStateServiceImpl() {
-        initGame();
-    }
+    @Value("${players.number}")
+    private int playersNumber;
+
+    @Value("${pits.number}")
+    private int pitsNumber;
+
+    @Value("${starting.stone.number}")
+    private int startingStoneNumber;
+
 
     public GameStateDto getGameState() {
-        return gameStateDto;
+        return new GameStateDto(gameStateDto);
     }
 
-    private void initGame() {
+    @PostConstruct
+    public void initGame() {
         gameStateDto = GameStateDto.builder()
                 .activePlayer(0)
                 .playerStateDtoList(initPlayers())
@@ -39,11 +45,11 @@ public class GameStateServiceImpl implements GameStateService {
     private List<PlayerStateDto> initPlayers() {
         List<PlayerStateDto> playerStateDtoList = new ArrayList<>();
         PlayerStateDto playerStateDto;
-        for (int i = 0; i < PLAYERS_NUMBER; i++) {
+        for (int i = 0; i < playersNumber; i++) {
 
             List<Integer> pitsList = new ArrayList<>();
-            for(int j=0;j<PITS_NUMBER;j++){
-                pitsList.add(STARTING_STONE_NUMBER);
+            for (int j = 0; j < pitsNumber; j++) {
+                pitsList.add(startingStoneNumber);
             }
 
             playerStateDto = PlayerStateDto.builder()
@@ -57,41 +63,58 @@ public class GameStateServiceImpl implements GameStateService {
     }
 
     public void processTurn(TurnActionDto turnActionDto) {
+        if(gameStateDto.isGameOver()){
+            throw new IllegalArgumentException();
+        }
         int playerID = turnActionDto.getPlayerId();
         int currentPit = turnActionDto.getPitId();
 
         int pitValue = gameStateDto.getSmallPitValue(playerID, currentPit);
         gameStateDto.updateSmallPitValue(playerID, currentPit, -pitValue);
-        distributeStones(playerID, currentPit+1, pitValue);
+        distributeStones(playerID, currentPit + 1, pitValue);
+        gameStateDto.setGameOver(isGameOver());
     }
 
-    private void captureStones(int playerId, int currentPit){
-        int otherPlayerId = (playerId + 1) % PLAYERS_NUMBER;
-        int otherPlayerPitValue = gameStateDto.getSmallPitValue(otherPlayerId, currentPit);
-        gameStateDto.updateScorePitValue(playerId, otherPlayerPitValue + 1);
-        gameStateDto.updateSmallPitValue(otherPlayerId, currentPit, -otherPlayerPitValue);
+    private void captureStones(int playerId, int currentPit) {
+        if(playerId == gameStateDto.getActivePlayer()) {
+            int otherPlayerId = (playerId + 1) % playersNumber;
+            int otherPlayerPitValue = gameStateDto.getSmallPitValue(otherPlayerId, pitsNumber - currentPit - 1);
+            gameStateDto.updateScorePitValue(playerId, otherPlayerPitValue + 1);
+            gameStateDto.updateSmallPitValue(otherPlayerId, currentPit, -otherPlayerPitValue);
+        }
     }
 
     private void distributeStones(int playerId, int currentPit, int stoneNumber) {
         if (stoneNumber > 0) {
-            if(currentPit < PITS_NUMBER){
-                if(stoneNumber == 1 && gameStateDto.getSmallPitValue(playerId, currentPit) == 0){
+            if (currentPit < pitsNumber) {
+                if (stoneNumber == 1 && gameStateDto.getSmallPitValue(playerId, currentPit) == 0) {
                     captureStones(playerId, currentPit);
-                } else{
+                } else {
                     gameStateDto.updateSmallPitValue(playerId, currentPit, 1);
                 }
-            } else{
+            } else {
                 gameStateDto.updateScorePitValue(playerId, 1);
-                playerId = (playerId + 1) % PLAYERS_NUMBER;
+                playerId = (playerId + 1) % playersNumber;
                 currentPit = -1;
             }
             distributeStones(playerId, currentPit + 1, stoneNumber - 1);
-        } else if(stoneNumber == 0 && currentPit != 0){ // if current pit is zero, last stone was put on score pit and player gets extra turn
+        } else if (stoneNumber == 0 && currentPit != 0) { // if current pit is zero, last stone was put on score pit and player gets extra turn
             changeActivePlayer();
         }
     }
 
-    private void changeActivePlayer(){
-        gameStateDto.setActivePlayer((gameStateDto.getActivePlayer() + 1) % PLAYERS_NUMBER);
+    private void changeActivePlayer() {
+        gameStateDto.setActivePlayer((gameStateDto.getActivePlayer() + 1) % playersNumber);
+    }
+
+    private boolean isGameOver(){
+        for (int i = 0; i < gameStateDto.getPlayerStateDtoList().size(); i++) {
+
+            List<Integer> pitList = gameStateDto.getPlayerStateDtoList().get(i).getPitList();
+            if(pitList.stream().mapToInt(Integer::intValue).sum() == 0){
+                return true;
+            }
+        }
+        return false;
     }
 }
