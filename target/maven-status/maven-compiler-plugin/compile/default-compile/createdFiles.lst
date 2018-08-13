@@ -10,7 +10,6 @@ model\ModelConfig.class
 view\ViewConfig.class
 controller\dto\PlayerStateDto.class
 controller\dto\TurnActionDto$TurnActionDtoBuilder.class
-model\Error.class
 view\MainView.class
 model\GameStateServiceImpl.class
 controller\dto\GameStateDto.class
