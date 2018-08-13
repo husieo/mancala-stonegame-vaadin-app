@@ -6,19 +6,23 @@ import controller.dto.TurnActionDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by Oleksandr Husiev on 8/13/2018.
  */
-//@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
 public class GameStateServiceImplTest {
 
+    @Autowired
     private GameStateService gameStateService;
 
     @Before
     public void setUp() {
         gameStateService = new GameStateServiceImpl();
-        gameStateService.initGame();
+//        gameStateService.initGame();
     }
 
     @Test
