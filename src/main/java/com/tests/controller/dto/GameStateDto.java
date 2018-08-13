@@ -1,6 +1,6 @@
 
 
-package controller.dto;
+package com.tests.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

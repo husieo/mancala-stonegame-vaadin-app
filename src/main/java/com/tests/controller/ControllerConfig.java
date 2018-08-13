@@ -1,6 +1,6 @@
 
 
-package controller;
+package com.tests.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

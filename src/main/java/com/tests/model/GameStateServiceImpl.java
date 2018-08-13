@@ -1,10 +1,10 @@
 
 
-package model;
+package com.tests.model;
 
-import controller.dto.GameStateDto;
-import controller.dto.PlayerStateDto;
-import controller.dto.TurnActionDto;
+import com.tests.controller.dto.GameStateDto;
+import com.tests.controller.dto.PlayerStateDto;
+import com.tests.controller.dto.TurnActionDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

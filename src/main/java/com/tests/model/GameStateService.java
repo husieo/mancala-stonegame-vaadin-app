@@ -1,9 +1,9 @@
 
 
-package model;
+package com.tests.model;
 
-import controller.dto.GameStateDto;
-import controller.dto.TurnActionDto;
+import com.tests.controller.dto.GameStateDto;
+import com.tests.controller.dto.TurnActionDto;
 
 /**
  * Created by Oleksandr Husiev on 8/12/2018.

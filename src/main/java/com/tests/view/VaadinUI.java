@@ -1,6 +1,6 @@
 
 
-package view;
+package com.tests.view;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;

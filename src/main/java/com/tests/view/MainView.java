@@ -1,6 +1,6 @@
 
 
-package view;
+package com.tests.view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.spring.annotation.SpringView;
@@ -10,10 +10,10 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
-import controller.GameStateController;
-import controller.dto.GameStateDto;
-import controller.dto.PlayerStateDto;
-import controller.dto.TurnActionDto;
+import com.tests.controller.GameStateController;
+import com.tests.controller.dto.GameStateDto;
+import com.tests.controller.dto.PlayerStateDto;
+import com.tests.controller.dto.TurnActionDto;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
@@ -70,7 +70,7 @@ public class MainView extends VerticalLayout implements View {
     }
 
     /**
-     * initialize view components for the pits
+     * initialize com.tests.view components for the pits
      *
      * @return
      */
@@ -104,7 +104,7 @@ public class MainView extends VerticalLayout implements View {
     }
 
     /**
-     * update the view
+     * update the com.tests.view
      */
     private void refreshView() {
         GameStateDto gameStateDto = gameStateController.getGameState();

@@ -1,10 +1,10 @@
 
 
-package view;
+package com.tests.view;
 
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.spring.annotation.ViewScope;
-import controller.GameStateController;
+import com.tests.controller.GameStateController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,13 +1,13 @@
 
 
-package boot;
+package com.tests.boot;
 
-import controller.ControllerConfig;
-import model.ModelConfig;
+import com.tests.controller.ControllerConfig;
+import com.tests.model.ModelConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
-import view.ViewConfig;
+import com.tests.view.ViewConfig;
 
 /**
  * Created by Oleksandr Husiev on 8/12/2018.

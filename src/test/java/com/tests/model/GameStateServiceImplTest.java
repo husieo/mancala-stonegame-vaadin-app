@@ -1,27 +1,30 @@
-package model;
+package com.tests.model;
 
 
-import controller.dto.GameStateDto;
-import controller.dto.TurnActionDto;
+import com.tests.controller.dto.GameStateDto;
+import com.tests.controller.dto.TurnActionDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by Oleksandr Husiev on 8/13/2018.
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest(classes= com.tests.model.GameStateServiceImpl.class)
 public class GameStateServiceImplTest {
+
 
     @Autowired
     private GameStateService gameStateService;
 
     @Before
     public void setUp() {
-        gameStateService = new GameStateServiceImpl();
+//        gameStateService = new GameStateServiceImpl();
 //        gameStateService.initGame();
     }
 
