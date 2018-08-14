@@ -3,6 +3,8 @@
 package com.mancala.view;
 
 import com.mancala.controller.GameStateController;
+import com.mancala.model.dto.GameStateDto;
+import com.mancala.model.dto.PlayerStateDto;
 import com.mancala.model.entity.PlayerStateEntity;
 import com.mancala.model.dto.TurnActionDto;
 import com.mancala.model.entity.GameStateEntity;
@@ -47,7 +49,7 @@ public class MainView extends VerticalLayout implements View {
 
     @PostConstruct
     private void init() {
-        GameStateEntity gameStateEntity = gameStateController.getGameState();
+        GameStateDto gameStateDto = gameStateController.getGameState();
         descriptionLabel = new Label();
         restartButton = new Button("RESTART");
         restartButton.setEnabled(false);
@@ -62,11 +64,11 @@ public class MainView extends VerticalLayout implements View {
         addComponent(restartButton);
 
         addComponent(initPlayerGrid());
-        updatePlayerGrid(gameStateEntity);
+        updatePlayerGrid(gameStateDto);
     }
 
     /**
-     * initialize com.mancala.view components for the pits
+     * initialize view components for the pits
      *
      * @return
      */
@@ -100,11 +102,11 @@ public class MainView extends VerticalLayout implements View {
     }
 
     /**
-     * update the com.mancala.view
+     * update the view
      */
     private void refreshView() {
-        GameStateEntity gameStateEntity = gameStateController.getGameState();
-        updatePlayerGrid(gameStateEntity);
+        GameStateDto gameStateDto = gameStateController.getGameState();
+        updatePlayerGrid(gameStateDto);
     }
 
     /**
@@ -122,14 +124,14 @@ public class MainView extends VerticalLayout implements View {
     /**
      * Update player grid according to the game state
      *
-     * @param gameStateEntity
+     * @param gameStateDto
      */
-    private void updatePlayerGrid(GameStateEntity gameStateEntity) {
-        List<PlayerStateEntity> playerStateEntityList = gameStateEntity.getPlayerStateEntityList();
-        int activePlayerId = gameStateEntity.getActivePlayer();
+    private void updatePlayerGrid(GameStateDto gameStateDto) {
+        List<PlayerStateDto> playerStateEntityList = gameStateDto.getPlayerStateDtoList();
+        int activePlayerId = gameStateDto.getActivePlayer();
         firstPlayerPit.setCaption(playerStateEntityList.get(0).getScorePit().toString());
         secondPlayerPit.setCaption(playerStateEntityList.get(1).getScorePit().toString());
-        if (gameStateEntity.isGameOver()) {
+        if (gameStateDto.isGameOver()) {
             descriptionLabel.setValue("GAME OVER");
             restartButton.setEnabled(true);
         }
@@ -137,7 +139,7 @@ public class MainView extends VerticalLayout implements View {
             List<Integer> pitList = playerStateEntityList.get(i).getPitList();
             for (int j = 0; j < pitsNumber; j++) {
                 final int playerId = i;
-                final int pitId = (playerId % 2 == 1) ? j : (pitsNumber - j - 1);
+                final int pitId = (playerId % 2 == 1) ? j : (pitsNumber - j - 1); // reverse the pits for view
                 Button pitButton = pitButtons.get(i).get(j);
                 if (i == activePlayerId) {
                     pitButton.setStyleName("active-button");

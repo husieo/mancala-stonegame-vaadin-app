@@ -23,11 +23,4 @@ public class PlayerStateEntity {
     Integer playerId;
     List<Integer> pitList;
     Integer scorePit;
-
-    public PlayerStateEntity(PlayerStateEntity other){
-        pitList = new ArrayList<>();
-        pitList.addAll(other.getPitList());
-        playerId = other.getPlayerId();
-        scorePit = other.scorePit;
-    }
 }

@@ -22,19 +22,6 @@ public class GameStateEntity {
     List<PlayerStateEntity> playerStateEntityList;
     private boolean gameOver;
 
-    /**
-     * Copy constructor
-     * @param other
-     */
-    public GameStateEntity(GameStateEntity other){
-        this.setActivePlayer(other.getActivePlayer());
-        this.setGameOver(other.isGameOver());
-        playerStateEntityList = new ArrayList<>();
-        for(PlayerStateEntity playerStateEntity : this.getPlayerStateEntityList()){
-            playerStateEntityList.add(new PlayerStateEntity(playerStateEntity));
-        }
-    }
-
 
 
 }

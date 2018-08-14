@@ -2,9 +2,10 @@
 
 package com.mancala.controller;
 
+import com.mancala.model.dto.GameStateDto;
 import com.mancala.model.entity.GameStateEntity;
 import com.mancala.model.dto.TurnActionDto;
-import com.mancala.model.service.GameStateService;
+import com.mancala.model.service.GameLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,22 +17,22 @@ public class GameStateControllerImpl implements GameStateController {
     private static final long serialVersionUID = -6242854424423314906L;
 
     @Autowired
-    private GameStateService gameStateService;
+    private GameLogicService gameLogicService;
 
 
-    public GameStateEntity getGameState() {
-        return gameStateService.getGameState();
+    public GameStateDto getGameState() {
+        return gameLogicService.getGameState();
     }
 
     public void processGameTurn(TurnActionDto turnActionDto) {
-        if (turnActionDto.getPlayerId() != gameStateService.getGameState().getActivePlayer()) {
+        if (turnActionDto.getPlayerId() != gameLogicService.getGameState().getActivePlayer()) {
             throw new IllegalArgumentException();
         }
-        gameStateService.processTurn(turnActionDto);
+        gameLogicService.processTurn(turnActionDto);
     }
 
     @Override
     public void restartGame() {
-        gameStateService.initGame();
+        gameLogicService.initGame();
     }
 }

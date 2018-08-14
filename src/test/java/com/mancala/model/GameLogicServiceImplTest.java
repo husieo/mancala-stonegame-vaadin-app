@@ -1,9 +1,9 @@
 package com.mancala.model;
 
 
+import com.mancala.model.dto.GameStateDto;
 import com.mancala.model.dto.TurnActionDto;
-import com.mancala.model.entity.GameStateEntity;
-import com.mancala.model.service.GameStateServiceImpl;
+import com.mancala.model.service.GameLogicServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,12 +15,12 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Created by Oleksandr Husiev on 8/13/2018.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= GameStateServiceImpl.class)
-public class GameStateServiceImplTest {
+@SpringBootTest(classes= GameLogicServiceImpl.class)
+public class GameLogicServiceImplTest {
 
 
     @Autowired
-    private GameStateServiceImpl gameStateService;
+    private GameLogicServiceImpl gameStateService;
 
     @Test
     public void processTurnPositive() {
@@ -29,8 +29,8 @@ public class GameStateServiceImplTest {
         TurnActionDto turnActionDto = TurnActionDto.builder().playerId(playerId).pitId(pitId).build();
         gameStateService.processTurn(turnActionDto);
 
-        GameStateEntity gameStateEntity = gameStateService.getGameState();
-        Assert.assertEquals(1, gameStateEntity.getActivePlayer());
+        GameStateDto gameStateDto = gameStateService.getGameState();
+        Assert.assertEquals(1, gameStateDto.getActivePlayer());
         Assert.assertEquals(0, gameStateService.getSmallPitValue(playerId, pitId));
     }
 
@@ -41,8 +41,8 @@ public class GameStateServiceImplTest {
         TurnActionDto turnActionDto = TurnActionDto.builder().playerId(playerId).pitId(pitId).build();
         gameStateService.processTurn(turnActionDto);
 
-        GameStateEntity gameStateEntity = gameStateService.getGameState();
-        Assert.assertEquals(playerId, gameStateEntity.getActivePlayer());
+        GameStateDto gameStateDto = gameStateService.getGameState();
+        Assert.assertEquals(playerId, gameStateDto.getActivePlayer());
         Assert.assertEquals(0, gameStateService.getSmallPitValue(playerId, pitId));
     }
 

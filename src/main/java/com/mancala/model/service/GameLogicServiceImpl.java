@@ -2,6 +2,8 @@
 
 package com.mancala.model.service;
 
+import com.mancala.model.dto.GameStateDto;
+import com.mancala.model.dto.PlayerStateDto;
 import com.mancala.model.entity.GameStateEntity;
 import com.mancala.model.entity.PlayerStateEntity;
 import com.mancala.model.dto.TurnActionDto;
@@ -16,7 +18,7 @@ import java.util.List;
  * Created by Oleksandr Husiev on 8/12/2018.
  */
 @Service
-public class GameStateServiceImpl implements GameStateService {
+public class GameLogicServiceImpl implements GameLogicService {
 
     private GameStateEntity gameStateEntity;
 
@@ -30,8 +32,22 @@ public class GameStateServiceImpl implements GameStateService {
     private int startingStoneNumber;
 
 
-    public GameStateEntity getGameState() {
-        return new GameStateEntity(gameStateEntity);
+    public GameStateDto getGameState() {
+        List<PlayerStateDto> playerStateDtoList = new ArrayList<>();
+        for(PlayerStateEntity playerStateEntity : gameStateEntity.getPlayerStateEntityList()){
+            PlayerStateDto playerStateDto = PlayerStateDto.builder()
+                    .playerId(playerStateEntity.getPlayerId())
+                    .pitList(playerStateEntity.getPitList())
+                    .scorePit(playerStateEntity.getScorePit())
+                    .build();
+            playerStateDtoList.add(playerStateDto);
+        }
+        GameStateDto gameStateDto = GameStateDto.builder()
+                .activePlayer(gameStateEntity.getActivePlayer())
+                .gameOver(gameStateEntity.isGameOver())
+                .playerStateDtoList(playerStateDtoList)
+                .build();
+        return gameStateDto;
     }
 
     @Override
@@ -133,4 +149,6 @@ public class GameStateServiceImpl implements GameStateService {
         int prevValue = gameStateEntity.getPlayerStateEntityList().get(playerId).getScorePit();
         gameStateEntity.getPlayerStateEntityList().get(playerId).setScorePit(prevValue + value);
     }
+
+
 }

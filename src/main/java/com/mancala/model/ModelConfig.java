@@ -2,8 +2,8 @@
 
 package com.mancala.model;
 
-import com.mancala.model.service.GameStateService;
-import com.mancala.model.service.GameStateServiceImpl;
+import com.mancala.model.service.GameLogicService;
+import com.mancala.model.service.GameLogicServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,8 @@ public class ModelConfig {
     private int startingStoneNumber;
 
     @Bean
-    public GameStateService getGameStateService(){
-        return new GameStateServiceImpl();
+    public GameLogicService getGameStateService(){
+        return new GameLogicServiceImpl();
     }
 
 }

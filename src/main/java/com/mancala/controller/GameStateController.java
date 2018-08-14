@@ -2,8 +2,8 @@
 
 package com.mancala.controller;
 
+import com.mancala.model.dto.GameStateDto;
 import com.mancala.model.dto.TurnActionDto;
-import com.mancala.model.entity.GameStateEntity;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ public interface GameStateController extends Serializable {
 
 
 
-        GameStateEntity getGameState();
+        GameStateDto getGameState();
 
         void processGameTurn(TurnActionDto turnActionDto);
 
