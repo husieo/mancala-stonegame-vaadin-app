@@ -1,9 +1,9 @@
 
 
-package com.tests.controller;
+package com.mancala.controller;
 
-import com.tests.controller.dto.GameStateDto;
-import com.tests.controller.dto.TurnActionDto;
+import com.mancala.model.dto.TurnActionDto;
+import com.mancala.model.entity.GameStateEntity;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ public interface GameStateController extends Serializable {
 
 
 
-        GameStateDto getGameState();
+        GameStateEntity getGameState();
 
         void processGameTurn(TurnActionDto turnActionDto);
 

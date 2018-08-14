@@ -1,10 +1,10 @@
 
 
-package com.tests.controller;
+package com.mancala.controller;
 
-import com.tests.controller.dto.GameStateDto;
-import com.tests.controller.dto.TurnActionDto;
-import com.tests.model.GameStateService;
+import com.mancala.model.entity.GameStateEntity;
+import com.mancala.model.dto.TurnActionDto;
+import com.mancala.model.service.GameStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,7 +19,7 @@ public class GameStateControllerImpl implements GameStateController {
     private GameStateService gameStateService;
 
 
-    public GameStateDto getGameState() {
+    public GameStateEntity getGameState() {
         return gameStateService.getGameState();
     }
 

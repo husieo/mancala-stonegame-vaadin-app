@@ -1,10 +1,10 @@
 
 
-package com.tests.view;
+package com.mancala.view;
 
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.spring.annotation.ViewScope;
-import com.tests.controller.GameStateController;
+import com.mancala.controller.GameStateController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

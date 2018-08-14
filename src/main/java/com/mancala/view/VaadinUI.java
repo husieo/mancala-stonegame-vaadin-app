@@ -1,6 +1,6 @@
 
 
-package com.tests.view;
+package com.mancala.view;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;

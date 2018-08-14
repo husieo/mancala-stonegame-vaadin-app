@@ -1,13 +1,13 @@
 
 
-package com.tests.boot;
+package com.mancala.boot;
 
-import com.tests.controller.ControllerConfig;
-import com.tests.model.ModelConfig;
+import com.mancala.controller.ControllerConfig;
+import com.mancala.model.ModelConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
-import com.tests.view.ViewConfig;
+import com.mancala.view.ViewConfig;
 
 /**
  * Created by Oleksandr Husiev on 8/12/2018.

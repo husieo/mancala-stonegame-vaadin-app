@@ -1,6 +1,6 @@
 
 
-package com.tests.controller.dto;
+package com.mancala.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,12 +19,12 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayerStateDto {
+public class PlayerStateEntity {
     Integer playerId;
     List<Integer> pitList;
     Integer scorePit;
 
-    public PlayerStateDto(PlayerStateDto other){
+    public PlayerStateEntity(PlayerStateEntity other){
         pitList = new ArrayList<>();
         pitList.addAll(other.getPitList());
         playerId = other.getPlayerId();

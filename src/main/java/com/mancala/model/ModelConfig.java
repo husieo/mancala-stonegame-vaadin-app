@@ -1,7 +1,9 @@
 
 
-package com.tests.model;
+package com.mancala.model;
 
+import com.mancala.model.service.GameStateService;
+import com.mancala.model.service.GameStateServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

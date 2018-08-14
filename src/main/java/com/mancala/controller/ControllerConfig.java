@@ -1,6 +1,6 @@
 
 
-package com.tests.controller;
+package com.mancala.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
