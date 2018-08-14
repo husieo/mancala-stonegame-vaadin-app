@@ -6,6 +6,7 @@ import com.mancala.model.dto.GameStateDto;
 import com.mancala.model.entity.GameStateEntity;
 import com.mancala.model.dto.TurnActionDto;
 import com.mancala.model.service.GameLogicService;
+import com.mancala.model.service.GameStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,13 +20,16 @@ public class GameStateControllerImpl implements GameStateController {
     @Autowired
     private GameLogicService gameLogicService;
 
+    @Autowired
+    private GameStateService gameStateService;
+
 
     public GameStateDto getGameState() {
-        return gameLogicService.getGameState();
+        return gameStateService.getGameState();
     }
 
     public void processGameTurn(TurnActionDto turnActionDto) {
-        if (turnActionDto.getPlayerId() != gameLogicService.getGameState().getActivePlayer()) {
+        if (turnActionDto.getPlayerId() != gameStateService.getActivePlayer()) {
             throw new IllegalArgumentException();
         }
         gameLogicService.processTurn(turnActionDto);
@@ -33,6 +37,6 @@ public class GameStateControllerImpl implements GameStateController {
 
     @Override
     public void restartGame() {
-        gameLogicService.initGame();
+        gameStateService.initGame();
     }
 }

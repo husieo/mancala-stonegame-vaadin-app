@@ -12,9 +12,6 @@ import com.mancala.model.dto.TurnActionDto;
  */
 public interface GameLogicService {
 
-    GameStateDto getGameState();
     void processTurn(TurnActionDto turnActionDto);
-    void initGame();
-
 
 }

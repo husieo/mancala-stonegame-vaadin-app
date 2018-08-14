@@ -6,6 +6,7 @@ com\mancala\model\dto\GameStateDto.class
 com\mancala\model\entity\GameStateEntity$GameStateEntityBuilder.class
 com\mancala\boot\VaadinApplication.class
 com\mancala\model\ModelConfig.class
+com\mancala\model\service\GameStateServiceImpl.class
 com\mancala\controller\GameStateControllerImpl.class
 com\mancala\view\MainView.class
 com\mancala\model\dto\TurnActionDto$TurnActionDtoBuilder.class
@@ -17,4 +18,5 @@ com\mancala\model\dto\TurnActionDto.class
 com\mancala\model\service\GameLogicServiceImpl.class
 com\mancala\view\ViewConfig.class
 com\mancala\controller\ControllerConfig.class
+com\mancala\model\service\GameStateService.class
 com\mancala\view\VaadinUI.class
