@@ -3,15 +3,16 @@
 package com.mancala.controller;
 
 import com.mancala.model.dto.GameStateDto;
-import com.mancala.model.entity.GameStateEntity;
 import com.mancala.model.dto.TurnActionDto;
 import com.mancala.model.service.GameLogicService;
 import com.mancala.model.service.GameStateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Oleksandr Husiev on 8/12/2018.
  */
+@Component
 public class GameStateControllerImpl implements GameStateController {
 
 
@@ -35,8 +36,8 @@ public class GameStateControllerImpl implements GameStateController {
         gameLogicService.processTurn(turnActionDto);
     }
 
-    @Override
     public void restartGame() {
         gameStateService.initGame();
     }
+
 }

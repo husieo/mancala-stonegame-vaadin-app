@@ -1,10 +1,8 @@
 package com.mancala.model.dto;
 
-import com.mancala.model.entity.PlayerStateEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

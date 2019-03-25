@@ -2,7 +2,6 @@ package com.mancala.model.service;
 
 import com.mancala.model.dto.GameStateDto;
 import com.mancala.model.dto.PlayerStateDto;
-import com.mancala.model.dto.TurnActionDto;
 import com.mancala.model.entity.GameStateEntity;
 import com.mancala.model.entity.PlayerStateEntity;
 import org.springframework.beans.factory.annotation.Value;

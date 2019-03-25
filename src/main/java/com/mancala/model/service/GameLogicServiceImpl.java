@@ -2,18 +2,10 @@
 
 package com.mancala.model.service;
 
-import com.mancala.model.dto.GameStateDto;
-import com.mancala.model.dto.PlayerStateDto;
-import com.mancala.model.entity.GameStateEntity;
-import com.mancala.model.entity.PlayerStateEntity;
 import com.mancala.model.dto.TurnActionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Oleksandr Husiev on 8/12/2018.

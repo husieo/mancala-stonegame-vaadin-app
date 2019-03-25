@@ -5,13 +5,15 @@ package com.mancala.view;
 import com.mancala.controller.GameStateController;
 import com.mancala.model.dto.GameStateDto;
 import com.mancala.model.dto.PlayerStateDto;
-import com.mancala.model.entity.PlayerStateEntity;
 import com.mancala.model.dto.TurnActionDto;
-import com.mancala.model.entity.GameStateEntity;
 import com.vaadin.navigator.View;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
